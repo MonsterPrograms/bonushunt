@@ -1,0 +1,9 @@
+D:\BonusHunt\BonusHunt\BonusHunt\bin\Debug\BonusHunt.exe.config
+D:\BonusHunt\BonusHunt\BonusHunt\bin\Debug\BonusHunt.exe
+D:\BonusHunt\BonusHunt\BonusHunt\bin\Debug\BonusHunt.pdb
+D:\BonusHunt\BonusHunt\BonusHunt\obj\Debug\BonusHunt.Properties.Resources.resources
+D:\BonusHunt\BonusHunt\BonusHunt\obj\Debug\BonusHunt.csproj.GenerateResource.cache
+D:\BonusHunt\BonusHunt\BonusHunt\obj\Debug\BonusHunt.exe
+D:\BonusHunt\BonusHunt\BonusHunt\obj\Debug\BonusHunt.pdb
+D:\BonusHunt\BonusHunt\BonusHunt\obj\Debug\BonusHunt.MainForm.resources
+D:\BonusHunt\BonusHunt\BonusHunt\obj\Debug\BonusHunt.csprojAssemblyReference.cache

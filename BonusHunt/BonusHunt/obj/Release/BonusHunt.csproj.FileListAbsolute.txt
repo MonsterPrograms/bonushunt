@@ -1,0 +1,8 @@
+D:\BonusHunt\BonusHunt\BonusHunt\bin\Release\BonusHunt.exe.config
+D:\BonusHunt\BonusHunt\BonusHunt\bin\Release\BonusHunt.exe
+D:\BonusHunt\BonusHunt\BonusHunt\bin\Release\BonusHunt.pdb
+D:\BonusHunt\BonusHunt\BonusHunt\obj\Release\BonusHunt.MainForm.resources
+D:\BonusHunt\BonusHunt\BonusHunt\obj\Release\BonusHunt.Properties.Resources.resources
+D:\BonusHunt\BonusHunt\BonusHunt\obj\Release\BonusHunt.csproj.GenerateResource.cache
+D:\BonusHunt\BonusHunt\BonusHunt\obj\Release\BonusHunt.exe
+D:\BonusHunt\BonusHunt\BonusHunt\obj\Release\BonusHunt.pdb
