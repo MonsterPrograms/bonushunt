@@ -17,11 +17,13 @@ namespace BonusHunt
 
             CalculateReturn();
 
-            CalculateBreakEven();
+            CalculateAverageRequired();
+
+            CalculateRunningAverage();
 
             try
             {
-                Bonuses.Rows[e.RowIndex].Cells[4].Value = Math.Round(Convert.ToDecimal(Bonuses.Rows[e.RowIndex].Cells[3].Value) / Convert.ToDecimal(Bonuses.Rows[e.RowIndex].Cells[2].Value), 1);
+                Bonuses.Rows[e.RowIndex].Cells[4].Value = Math.Round(Convert.ToDecimal(Bonuses.Rows[e.RowIndex].Cells[3].Value) / Convert.ToDecimal(Bonuses.Rows[e.RowIndex].Cells[2].Value), 2);
             }
             catch
             {
@@ -35,14 +37,16 @@ namespace BonusHunt
 
             CalculateReturn();
 
-            CalculateBreakEven();
+            CalculateAverageRequired();
+
+            CalculateRunningAverage();
         }
 
         private void txtStart_TextChanged(object sender, EventArgs e)
         {
             CalculateReturn();
 
-            CalculateBreakEven();
+            CalculateAverageRequired();
         }
 
         private void CalculateBonuses()
@@ -90,7 +94,7 @@ namespace BonusHunt
             }
         }
 
-        private void CalculateBreakEven()
+        private void CalculateAverageRequired()
         {
             try
             {
@@ -111,12 +115,44 @@ namespace BonusHunt
 
                 if (LHS == 0)
                 {
-                    lblBreakEven.Text = $"Avg X Needed: End Of Opening";
+                    lblAverageRequired.Text = $"Average Required: End Of Opening";
                 }
                 else
                 {
-                    decimal breakEven = RHS / LHS;
-                    lblBreakEven.Text = $"Avg X Needed: {Math.Round(breakEven)}";
+                    decimal averageRequired = RHS / LHS;
+                    lblAverageRequired.Text = $"Average Required: {Math.Round(averageRequired, 2)}";
+                }
+            }
+            catch
+            {
+                // ignored
+            }
+        }
+
+        private void CalculateRunningAverage()
+        {
+            decimal multiTotal = 0;
+            int bonusesOpened = 0;
+
+            try
+            {
+                foreach (DataGridViewRow row in Bonuses.Rows)
+                {
+                    if (Convert.ToDecimal(row.Cells[2].Value) > 0 && row.Cells[3].Value != null)
+                    {
+                        multiTotal = multiTotal + (Convert.ToDecimal(Bonuses.Rows[row.Index].Cells[3].Value) / Convert.ToDecimal(Bonuses.Rows[row.Index].Cells[2].Value));
+                        bonusesOpened++;
+                    }
+                }
+
+                if (bonusesOpened == 0)
+                {
+                    lblRunningAverage.Text = $"Running Average: 0";
+                }
+                else
+                {
+                    decimal runningAverage = multiTotal / bonusesOpened;
+                    lblRunningAverage.Text = $"Running Average: {Math.Round(runningAverage, 2)}";
                 }
             }
             catch

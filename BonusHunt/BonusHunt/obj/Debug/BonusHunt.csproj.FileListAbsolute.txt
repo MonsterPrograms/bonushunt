@@ -6,4 +6,3 @@ D:\BonusHunt\BonusHunt\BonusHunt\obj\Debug\BonusHunt.csproj.GenerateResource.cac
 D:\BonusHunt\BonusHunt\BonusHunt\obj\Debug\BonusHunt.exe
 D:\BonusHunt\BonusHunt\BonusHunt\obj\Debug\BonusHunt.pdb
 D:\BonusHunt\BonusHunt\BonusHunt\obj\Debug\BonusHunt.MainForm.resources
-D:\BonusHunt\BonusHunt\BonusHunt\obj\Debug\BonusHunt.csprojAssemblyReference.cache
