@@ -160,5 +160,21 @@ namespace BonusHunt
                 // ignored
             }
         }
+
+        private void Bonuses_SortCompare(object sender, DataGridViewSortCompareEventArgs e)
+        {
+            try
+            {
+                if (e.Column.Index == 2 || e.Column.Index == 3 || e.Column.Index == 4)
+                {
+                    e.SortResult = decimal.Parse(e.CellValue1.ToString()).CompareTo(decimal.Parse(e.CellValue2.ToString()));
+                    e.Handled = true;
+                }
+            }
+            catch
+            {
+                // ignored
+            }
+        }
     }
 }

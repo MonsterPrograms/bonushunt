@@ -6,4 +6,3 @@ D:\BonusHunt\BonusHunt\BonusHunt\obj\Release\BonusHunt.Properties.Resources.reso
 D:\BonusHunt\BonusHunt\BonusHunt\obj\Release\BonusHunt.csproj.GenerateResource.cache
 D:\BonusHunt\BonusHunt\BonusHunt\obj\Release\BonusHunt.exe
 D:\BonusHunt\BonusHunt\BonusHunt\obj\Release\BonusHunt.pdb
-D:\BonusHunt\BonusHunt\BonusHunt\obj\Release\BonusHunt.csprojAssemblyReference.cache
