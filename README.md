@@ -4,7 +4,8 @@ Shows useful statistics for your bonus hunt
 - Amount Won
 - Return
 - Bonuses Remaining
-- Live Average X Needed
+- Average Required
+- Running Average
 
 If you appreciate my work regarding this project, then I am accepting crypto donations. Donations are not mandatory, but are highly appreciated. Please note that donations are non-refundable.
 
