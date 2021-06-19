@@ -1,11 +1,13 @@
 # bonushunt
 Shows useful statistics for your bonus hunt
 - Bonuses Collected
-- Amount Won
-- Return
 - Bonuses Remaining
-- Average Required
-- Running Average
+- Amount Won
+- Profit
+- Average Win Required
+- Average X Required
+- Running Average Win
+- Running Average X
 
 If you appreciate my work regarding this project, then I am accepting crypto donations. Donations are not mandatory, but are highly appreciated. Please note that donations are non-refundable.
 
