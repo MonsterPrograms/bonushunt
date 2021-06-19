@@ -13,17 +13,33 @@ namespace BonusHunt
 
         private void Bonuses_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
+            try
+            {
+                foreach (DataGridViewRow dvr in Bonuses.Rows)
+                {
+                    dvr.Cells[0].Value = dvr.Index + 1;
+                }
+            }
+            catch
+            {
+                // ignored
+            }
+
             CalculateBonuses();
 
-            CalculateReturn();
+            CalculateProfit();
 
-            CalculateAverageRequired();
+            CalculateAverageXRequired();
 
-            CalculateRunningAverage();
+            CalculateRunningAverageX();
+
+            CalculateAverageWinRequired();
+
+            CalculateRunningAverageWin();
 
             try
             {
-                Bonuses.Rows[e.RowIndex].Cells[4].Value = Math.Round(Convert.ToDecimal(Bonuses.Rows[e.RowIndex].Cells[3].Value) / Convert.ToDecimal(Bonuses.Rows[e.RowIndex].Cells[2].Value), 2);
+                Bonuses.Rows[e.RowIndex].Cells[5].Value = Convert.ToDecimal(Bonuses.Rows[e.RowIndex].Cells[3].Value) == 0 ? 0 : Math.Round(Convert.ToDecimal(Bonuses.Rows[e.RowIndex].Cells[4].Value) / Convert.ToDecimal(Bonuses.Rows[e.RowIndex].Cells[3].Value), 2);
             }
             catch
             {
@@ -33,43 +49,59 @@ namespace BonusHunt
 
         private void Bonuses_RowsRemoved(object sender, DataGridViewRowsRemovedEventArgs e)
         {
+            try
+            {
+                foreach (DataGridViewRow dvr in Bonuses.Rows)
+                {
+                    dvr.Cells[0].Value = dvr.Index + 1;
+                }
+            }
+            catch
+            {
+                // ignored
+            }
+
             CalculateBonuses();
 
-            CalculateReturn();
+            CalculateProfit();
 
-            CalculateAverageRequired();
+            CalculateAverageXRequired();
 
-            CalculateRunningAverage();
+            CalculateRunningAverageX();
+
+            CalculateAverageWinRequired();
+
+            CalculateRunningAverageWin();
         }
 
         private void txtStart_TextChanged(object sender, EventArgs e)
         {
-            CalculateReturn();
+            CalculateProfit();
 
-            CalculateAverageRequired();
+            CalculateAverageXRequired();
+
+            CalculateAverageWinRequired();
         }
 
         private void CalculateBonuses()
         {
             try
             {
-                int bonuses = 0;
-                int bonusesRemaining = 0;
+                var bonuses = 0;
+                var bonusesRemaining = 0;
 
                 foreach (DataGridViewRow dvr in Bonuses.Rows)
                 {
-                    if (!(dvr.Cells[0].Value == null && dvr.Cells[1].Value == null && dvr.Cells[2].Value == null && dvr.Cells[3].Value == null))
-                    {
-                        bonuses++;
+                    if (dvr.Cells[3].Value == null) continue;
+                    bonuses++;
 
-                        if (dvr.Cells[2].Value != null && dvr.Cells[3].Value == null)
-                        {
-                            bonusesRemaining++;
-                        }
+                    if (dvr.Cells[4].Value == null)
+                    {
+                        bonusesRemaining++;
                     }
                 }
 
-                lblBonuses.Text = $"Bonuses Collected: {bonuses}";
+                lblBonusesCollected.Text = $"Bonuses Collected: {bonuses}";
                 lblBonusesRemaining.Text = $"Bonuses Remaining: {bonusesRemaining}";
             }
             catch
@@ -78,15 +110,14 @@ namespace BonusHunt
             }
         }
 
-        private void CalculateReturn()
+        private void CalculateProfit()
         {
             try
             {
-                decimal amountWon = Bonuses.Rows.Cast<DataGridViewRow>()
-                                .Sum(t => Convert.ToDecimal(t.Cells[3].Value));
+                var amountWon = Bonuses.Rows.Cast<DataGridViewRow>().Where(t => t.Cells[3].Value != null).Sum(t => Convert.ToDecimal(t.Cells[4].Value));
 
                 lblAmountWon.Text = $"Amount Won: {amountWon}";
-                lblReturn.Text = $"Return: {amountWon - Convert.ToDecimal(txtStart.Text)}";
+                lblProfit.Text = $"Profit: {amountWon - Convert.ToDecimal(txtStart.Text)}";
             }
             catch
             {
@@ -94,33 +125,33 @@ namespace BonusHunt
             }
         }
 
-        private void CalculateAverageRequired()
+        private void CalculateAverageXRequired()
         {
             try
             {
                 decimal LHS = 0;
-                decimal RHS = Convert.ToDecimal(txtStart.Text);
+                var RHS = Convert.ToDecimal(txtStart.Text);
 
                 foreach (DataGridViewRow row in Bonuses.Rows)
                 {
-                    if (Convert.ToDecimal(row.Cells[2].Value) > 0 && row.Cells[3].Value != null)
+                    if (row.Cells[3].Value != null && row.Cells[4].Value != null)
                     {
-                        RHS = RHS - Convert.ToDecimal(row.Cells[3].Value);
+                        RHS -= Convert.ToDecimal(row.Cells[4].Value);
                     }
-                    else if (Convert.ToDecimal(row.Cells[2].Value) > 0 && row.Cells[3].Value == null)
+                    else if (row.Cells[3].Value != null && row.Cells[4].Value == null)
                     {
-                        LHS = LHS + Convert.ToDecimal(row.Cells[2].Value);
+                        LHS += Convert.ToDecimal(row.Cells[3].Value);
                     }
                 }
 
                 if (LHS == 0)
                 {
-                    lblAverageRequired.Text = $"Average Required: End Of Opening";
+                    lblAverageXRequired.Text = $"Average X Required: End Of Opening";
                 }
                 else
                 {
-                    decimal averageRequired = RHS / LHS;
-                    lblAverageRequired.Text = $"Average Required: {Math.Round(averageRequired, 2)}";
+                    var averageXRequired = RHS / LHS;
+                    lblAverageXRequired.Text = $"Average X Required: {Math.Round(averageXRequired, 2)}";
                 }
             }
             catch
@@ -129,30 +160,76 @@ namespace BonusHunt
             }
         }
 
-        private void CalculateRunningAverage()
+        private void CalculateRunningAverageX()
         {
             decimal multiTotal = 0;
-            int bonusesOpened = 0;
+            var bonusesOpened = 0;
 
             try
             {
                 foreach (DataGridViewRow row in Bonuses.Rows)
                 {
-                    if (Convert.ToDecimal(row.Cells[2].Value) > 0 && row.Cells[3].Value != null)
-                    {
-                        multiTotal = multiTotal + (Convert.ToDecimal(Bonuses.Rows[row.Index].Cells[3].Value) / Convert.ToDecimal(Bonuses.Rows[row.Index].Cells[2].Value));
-                        bonusesOpened++;
-                    }
+                    if (row.Cells[3].Value == null || row.Cells[4].Value == null) continue;
+                    multiTotal += (Convert.ToDecimal(Bonuses.Rows[row.Index].Cells[4].Value) / Convert.ToDecimal(Bonuses.Rows[row.Index].Cells[3].Value));
+                    bonusesOpened++;
                 }
 
                 if (bonusesOpened == 0)
                 {
-                    lblRunningAverage.Text = $"Running Average: 0";
+                    lblRunningAverageX.Text = $"Running Average X: 0";
                 }
                 else
                 {
-                    decimal runningAverage = multiTotal / bonusesOpened;
-                    lblRunningAverage.Text = $"Running Average: {Math.Round(runningAverage, 2)}";
+                    var runningXAverage = multiTotal / bonusesOpened;
+                    lblRunningAverageX.Text = $"Running Average X: {Math.Round(runningXAverage, 2)}";
+                }
+            }
+            catch
+            {
+                // ignored
+            }
+        }
+
+        private void CalculateAverageWinRequired()
+        {
+            try
+            {
+                var startingBalance = Convert.ToDecimal(txtStart.Text);
+                var amountWon = Bonuses.Rows.Cast<DataGridViewRow>().Where(t => t.Cells[3].Value != null).Sum(t => Convert.ToDecimal(t.Cells[4].Value));
+                var bonusesRemaining = Bonuses.Rows.Cast<DataGridViewRow>().Count(dvr => dvr.Cells[3].Value != null && dvr.Cells[4].Value == null);
+
+                if (bonusesRemaining == 0)
+                {
+                    lblAverageWinRequired.Text = $"Average Win Required: End Of Opening";
+                }
+                else
+                {
+                    startingBalance -= amountWon;
+                    var averageWinRequired = startingBalance / bonusesRemaining;
+                    lblAverageWinRequired.Text = $"Average Win Required: {Math.Round(averageWinRequired, 2)}";
+                }
+            }
+            catch
+            {
+                // ignored
+            }
+        }
+
+        private void CalculateRunningAverageWin()
+        {
+            try
+            {
+                var winTotal = Bonuses.Rows.Cast<DataGridViewRow>().Where(t => t.Cells[3].Value != null).Sum(t => Convert.ToDecimal(t.Cells[4].Value));
+                var bonusesOpened = Bonuses.Rows.Cast<DataGridViewRow>().Count(row => row.Cells[3].Value != null && row.Cells[4].Value != null);
+
+                if (bonusesOpened == 0)
+                {
+                    lblRunningAverageWin.Text = $"Running Average Win: 0";
+                }
+                else
+                {
+                    var runningWinAverage = winTotal / bonusesOpened;
+                    lblRunningAverageWin.Text = $"Running Average Win: {Math.Round(runningWinAverage, 2)}";
                 }
             }
             catch
@@ -165,15 +242,39 @@ namespace BonusHunt
         {
             try
             {
-                if (e.Column.Index == 2 || e.Column.Index == 3 || e.Column.Index == 4)
-                {
-                    e.SortResult = decimal.Parse(e.CellValue1.ToString()).CompareTo(decimal.Parse(e.CellValue2.ToString()));
-                    e.Handled = true;
-                }
+                if (e.Column.Index != 0 && e.Column.Index != 3 && e.Column.Index != 4 && e.Column.Index != 5) return;
+                e.SortResult = decimal.Parse(e.CellValue1.ToString()).CompareTo(decimal.Parse(e.CellValue2.ToString()));
+                e.Handled = true;
             }
             catch
             {
                 // ignored
+            }
+        }
+
+        private void Bonuses_CellValidating(object sender, DataGridViewCellValidatingEventArgs e)
+        {
+            Bonuses.Rows[e.RowIndex].ErrorText = "";
+            decimal newDecimal;
+
+            if (Bonuses.Rows[e.RowIndex].IsNewRow || e.FormattedValue.ToString() == "") { return; }
+
+            switch (e.ColumnIndex)
+            {
+                case 3 when decimal.TryParse(e.FormattedValue.ToString(),
+                    out newDecimal) && newDecimal > 0:
+                    return;
+                case 3:
+                    e.Cancel = true;
+                    Bonuses.Rows[e.RowIndex].ErrorText = "the value must be greater than 0";
+                    break;
+                case 4 when decimal.TryParse(e.FormattedValue.ToString(),
+                    out newDecimal) && newDecimal >= 0:
+                    return;
+                case 4:
+                    e.Cancel = true;
+                    Bonuses.Rows[e.RowIndex].ErrorText = "the value must be 0 or greater";
+                    break;
             }
         }
     }
