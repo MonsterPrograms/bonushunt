@@ -37,6 +37,8 @@ namespace BonusHunt
 
             CalculateRunningAverageWin();
 
+            CalculateProjectedEndAmount();
+
             try
             {
                 Bonuses.Rows[e.RowIndex].Cells[5].Value = Convert.ToDecimal(Bonuses.Rows[e.RowIndex].Cells[3].Value) == 0 ? 0 : Math.Round(Convert.ToDecimal(Bonuses.Rows[e.RowIndex].Cells[4].Value) / Convert.ToDecimal(Bonuses.Rows[e.RowIndex].Cells[3].Value), 2);
@@ -72,6 +74,8 @@ namespace BonusHunt
             CalculateAverageWinRequired();
 
             CalculateRunningAverageWin();
+
+            CalculateProjectedEndAmount();
         }
 
         private void txtStart_TextChanged(object sender, EventArgs e)
@@ -230,6 +234,48 @@ namespace BonusHunt
                 {
                     var runningWinAverage = winTotal / bonusesOpened;
                     lblRunningAverageWin.Text = $"Running Average Win: {Math.Round(runningWinAverage, 2)}";
+                }
+            }
+            catch
+            {
+                // ignored
+            }
+        }
+
+        private void CalculateProjectedEndAmount()
+        {
+            var amountWon = Bonuses.Rows.Cast<DataGridViewRow>().Where(t => t.Cells[3].Value != null).Sum(t => Convert.ToDecimal(t.Cells[4].Value));
+
+            decimal multiTotal = 0;
+            var bonusesOpened = 0;
+
+            try
+            {
+                foreach (DataGridViewRow row in Bonuses.Rows)
+                {
+                    if (row.Cells[3].Value == null || row.Cells[4].Value == null) continue;
+                    multiTotal += (Convert.ToDecimal(Bonuses.Rows[row.Index].Cells[4].Value) / Convert.ToDecimal(Bonuses.Rows[row.Index].Cells[3].Value));
+                    bonusesOpened++;
+                }
+
+                if (bonusesOpened == 0)
+                {
+                    lblProjectedEndAmount.Text = "Projected End Amount: 0";
+                }
+                else
+                {
+                    var runningXAverage = multiTotal / bonusesOpened;
+                    var projectedEndAmount = amountWon;
+
+                    foreach (DataGridViewRow row in Bonuses.Rows)
+                    {
+                        if (row.Cells[3].Value != null && row.Cells[4].Value == null)
+                        {
+                            projectedEndAmount += decimal.Parse(row.Cells[3].Value.ToString()) * runningXAverage;
+                        }
+                    }
+
+                    lblProjectedEndAmount.Text = $"Projected End Amount: {Math.Round(projectedEndAmount, 2)}";
                 }
             }
             catch

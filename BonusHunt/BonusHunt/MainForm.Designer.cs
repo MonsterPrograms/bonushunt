@@ -39,6 +39,12 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
             this.Bonuses = new System.Windows.Forms.DataGridView();
+            this.Bonus = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Slot = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Provider = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Bet = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Result = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Mutli = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.label1 = new System.Windows.Forms.Label();
             this.txtStart = new System.Windows.Forms.TextBox();
             this.lblBonusesCollected = new System.Windows.Forms.Label();
@@ -49,17 +55,15 @@
             this.lblAverageWinRequired = new System.Windows.Forms.Label();
             this.lblRunningAverageWin = new System.Windows.Forms.Label();
             this.lblBonusesRemaining = new System.Windows.Forms.Label();
-            this.Bonus = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Slot = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Provider = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Bet = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Result = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Mutli = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.lblProjectedEndAmount = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.Bonuses)).BeginInit();
             this.SuspendLayout();
             // 
             // Bonuses
             // 
+            this.Bonuses.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.Bonuses.BackgroundColor = System.Drawing.SystemColors.Control;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
@@ -85,7 +89,6 @@
             dataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.Bonuses.DefaultCellStyle = dataGridViewCellStyle8;
-            this.Bonuses.Dock = System.Windows.Forms.DockStyle.Left;
             this.Bonuses.EnableHeadersVisualStyles = false;
             this.Bonuses.Location = new System.Drawing.Point(0, 0);
             this.Bonuses.Name = "Bonuses";
@@ -105,105 +108,6 @@
             this.Bonuses.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.Bonuses_CellValueChanged);
             this.Bonuses.RowsRemoved += new System.Windows.Forms.DataGridViewRowsRemovedEventHandler(this.Bonuses_RowsRemoved);
             this.Bonuses.SortCompare += new System.Windows.Forms.DataGridViewSortCompareEventHandler(this.Bonuses_SortCompare);
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
-            this.label1.Location = new System.Drawing.Point(587, 9);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(43, 18);
-            this.label1.TabIndex = 1;
-            this.label1.Text = "Start:";
-            // 
-            // txtStart
-            // 
-            this.txtStart.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
-            this.txtStart.Location = new System.Drawing.Point(590, 30);
-            this.txtStart.Name = "txtStart";
-            this.txtStart.Size = new System.Drawing.Size(151, 24);
-            this.txtStart.TabIndex = 2;
-            this.txtStart.TextChanged += new System.EventHandler(this.txtStart_TextChanged);
-            // 
-            // lblBonusesCollected
-            // 
-            this.lblBonusesCollected.AutoSize = true;
-            this.lblBonusesCollected.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
-            this.lblBonusesCollected.Location = new System.Drawing.Point(587, 62);
-            this.lblBonusesCollected.Name = "lblBonusesCollected";
-            this.lblBonusesCollected.Size = new System.Drawing.Size(149, 18);
-            this.lblBonusesCollected.TabIndex = 3;
-            this.lblBonusesCollected.Text = "Bonuses Collected: 0";
-            // 
-            // lblAmountWon
-            // 
-            this.lblAmountWon.AutoSize = true;
-            this.lblAmountWon.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
-            this.lblAmountWon.Location = new System.Drawing.Point(587, 108);
-            this.lblAmountWon.Name = "lblAmountWon";
-            this.lblAmountWon.Size = new System.Drawing.Size(111, 18);
-            this.lblAmountWon.TabIndex = 4;
-            this.lblAmountWon.Text = "Amount Won: 0";
-            // 
-            // lblProfit
-            // 
-            this.lblProfit.AutoSize = true;
-            this.lblProfit.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
-            this.lblProfit.Location = new System.Drawing.Point(587, 131);
-            this.lblProfit.Name = "lblProfit";
-            this.lblProfit.Size = new System.Drawing.Size(59, 18);
-            this.lblProfit.TabIndex = 5;
-            this.lblProfit.Text = "Profit: 0";
-            // 
-            // lblAverageXRequired
-            // 
-            this.lblAverageXRequired.AutoSize = true;
-            this.lblAverageXRequired.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
-            this.lblAverageXRequired.Location = new System.Drawing.Point(587, 177);
-            this.lblAverageXRequired.Name = "lblAverageXRequired";
-            this.lblAverageXRequired.Size = new System.Drawing.Size(154, 18);
-            this.lblAverageXRequired.TabIndex = 6;
-            this.lblAverageXRequired.Text = "Average X Required: 0";
-            // 
-            // lblRunningAverageX
-            // 
-            this.lblRunningAverageX.AutoSize = true;
-            this.lblRunningAverageX.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
-            this.lblRunningAverageX.Location = new System.Drawing.Point(587, 223);
-            this.lblRunningAverageX.Name = "lblRunningAverageX";
-            this.lblRunningAverageX.Size = new System.Drawing.Size(149, 18);
-            this.lblRunningAverageX.TabIndex = 8;
-            this.lblRunningAverageX.Text = "Running Average X: 0";
-            // 
-            // lblAverageWinRequired
-            // 
-            this.lblAverageWinRequired.AutoSize = true;
-            this.lblAverageWinRequired.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
-            this.lblAverageWinRequired.Location = new System.Drawing.Point(587, 154);
-            this.lblAverageWinRequired.Name = "lblAverageWinRequired";
-            this.lblAverageWinRequired.Size = new System.Drawing.Size(170, 18);
-            this.lblAverageWinRequired.TabIndex = 9;
-            this.lblAverageWinRequired.Text = "Average Win Required: 0";
-            // 
-            // lblRunningAverageWin
-            // 
-            this.lblRunningAverageWin.AutoSize = true;
-            this.lblRunningAverageWin.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
-            this.lblRunningAverageWin.Location = new System.Drawing.Point(587, 200);
-            this.lblRunningAverageWin.Name = "lblRunningAverageWin";
-            this.lblRunningAverageWin.Size = new System.Drawing.Size(165, 18);
-            this.lblRunningAverageWin.TabIndex = 10;
-            this.lblRunningAverageWin.Text = "Running Average Win: 0";
-            // 
-            // lblBonusesRemaining
-            // 
-            this.lblBonusesRemaining.AutoSize = true;
-            this.lblBonusesRemaining.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
-            this.lblBonusesRemaining.Location = new System.Drawing.Point(587, 85);
-            this.lblBonusesRemaining.Name = "lblBonusesRemaining";
-            this.lblBonusesRemaining.Size = new System.Drawing.Size(157, 18);
-            this.lblBonusesRemaining.TabIndex = 12;
-            this.lblBonusesRemaining.Text = "Bonuses Remaining: 0";
             // 
             // Bonus
             // 
@@ -255,11 +159,132 @@
             this.Mutli.ReadOnly = true;
             this.Mutli.Width = 69;
             // 
+            // label1
+            // 
+            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
+            this.label1.Location = new System.Drawing.Point(587, 9);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(43, 18);
+            this.label1.TabIndex = 1;
+            this.label1.Text = "Start:";
+            // 
+            // txtStart
+            // 
+            this.txtStart.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtStart.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
+            this.txtStart.Location = new System.Drawing.Point(590, 30);
+            this.txtStart.Name = "txtStart";
+            this.txtStart.Size = new System.Drawing.Size(151, 24);
+            this.txtStart.TabIndex = 2;
+            this.txtStart.TextChanged += new System.EventHandler(this.txtStart_TextChanged);
+            // 
+            // lblBonusesCollected
+            // 
+            this.lblBonusesCollected.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblBonusesCollected.AutoSize = true;
+            this.lblBonusesCollected.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
+            this.lblBonusesCollected.Location = new System.Drawing.Point(587, 62);
+            this.lblBonusesCollected.Name = "lblBonusesCollected";
+            this.lblBonusesCollected.Size = new System.Drawing.Size(149, 18);
+            this.lblBonusesCollected.TabIndex = 3;
+            this.lblBonusesCollected.Text = "Bonuses Collected: 0";
+            // 
+            // lblAmountWon
+            // 
+            this.lblAmountWon.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblAmountWon.AutoSize = true;
+            this.lblAmountWon.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
+            this.lblAmountWon.Location = new System.Drawing.Point(587, 108);
+            this.lblAmountWon.Name = "lblAmountWon";
+            this.lblAmountWon.Size = new System.Drawing.Size(111, 18);
+            this.lblAmountWon.TabIndex = 4;
+            this.lblAmountWon.Text = "Amount Won: 0";
+            // 
+            // lblProfit
+            // 
+            this.lblProfit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblProfit.AutoSize = true;
+            this.lblProfit.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
+            this.lblProfit.Location = new System.Drawing.Point(587, 131);
+            this.lblProfit.Name = "lblProfit";
+            this.lblProfit.Size = new System.Drawing.Size(59, 18);
+            this.lblProfit.TabIndex = 5;
+            this.lblProfit.Text = "Profit: 0";
+            // 
+            // lblAverageXRequired
+            // 
+            this.lblAverageXRequired.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblAverageXRequired.AutoSize = true;
+            this.lblAverageXRequired.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
+            this.lblAverageXRequired.Location = new System.Drawing.Point(587, 177);
+            this.lblAverageXRequired.Name = "lblAverageXRequired";
+            this.lblAverageXRequired.Size = new System.Drawing.Size(251, 18);
+            this.lblAverageXRequired.TabIndex = 6;
+            this.lblAverageXRequired.Text = "Average X Required: End Of Opening";
+            // 
+            // lblRunningAverageX
+            // 
+            this.lblRunningAverageX.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblRunningAverageX.AutoSize = true;
+            this.lblRunningAverageX.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
+            this.lblRunningAverageX.Location = new System.Drawing.Point(587, 223);
+            this.lblRunningAverageX.Name = "lblRunningAverageX";
+            this.lblRunningAverageX.Size = new System.Drawing.Size(149, 18);
+            this.lblRunningAverageX.TabIndex = 8;
+            this.lblRunningAverageX.Text = "Running Average X: 0";
+            // 
+            // lblAverageWinRequired
+            // 
+            this.lblAverageWinRequired.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblAverageWinRequired.AutoSize = true;
+            this.lblAverageWinRequired.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
+            this.lblAverageWinRequired.Location = new System.Drawing.Point(587, 154);
+            this.lblAverageWinRequired.Name = "lblAverageWinRequired";
+            this.lblAverageWinRequired.Size = new System.Drawing.Size(267, 18);
+            this.lblAverageWinRequired.TabIndex = 9;
+            this.lblAverageWinRequired.Text = "Average Win Required: End Of Opening";
+            // 
+            // lblRunningAverageWin
+            // 
+            this.lblRunningAverageWin.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblRunningAverageWin.AutoSize = true;
+            this.lblRunningAverageWin.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
+            this.lblRunningAverageWin.Location = new System.Drawing.Point(587, 200);
+            this.lblRunningAverageWin.Name = "lblRunningAverageWin";
+            this.lblRunningAverageWin.Size = new System.Drawing.Size(165, 18);
+            this.lblRunningAverageWin.TabIndex = 10;
+            this.lblRunningAverageWin.Text = "Running Average Win: 0";
+            // 
+            // lblBonusesRemaining
+            // 
+            this.lblBonusesRemaining.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblBonusesRemaining.AutoSize = true;
+            this.lblBonusesRemaining.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
+            this.lblBonusesRemaining.Location = new System.Drawing.Point(587, 85);
+            this.lblBonusesRemaining.Name = "lblBonusesRemaining";
+            this.lblBonusesRemaining.Size = new System.Drawing.Size(157, 18);
+            this.lblBonusesRemaining.TabIndex = 12;
+            this.lblBonusesRemaining.Text = "Bonuses Remaining: 0";
+            // 
+            // lblProjectedEndAmount
+            // 
+            this.lblProjectedEndAmount.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblProjectedEndAmount.AutoSize = true;
+            this.lblProjectedEndAmount.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
+            this.lblProjectedEndAmount.Location = new System.Drawing.Point(587, 246);
+            this.lblProjectedEndAmount.Name = "lblProjectedEndAmount";
+            this.lblProjectedEndAmount.Size = new System.Drawing.Size(172, 18);
+            this.lblProjectedEndAmount.TabIndex = 13;
+            this.lblProjectedEndAmount.Text = "Projected End Amount: 0";
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(856, 450);
+            this.Controls.Add(this.lblProjectedEndAmount);
             this.Controls.Add(this.lblBonusesRemaining);
             this.Controls.Add(this.lblRunningAverageWin);
             this.Controls.Add(this.lblAverageWinRequired);
@@ -273,6 +298,7 @@
             this.Controls.Add(this.Bonuses);
             this.Name = "MainForm";
             this.ShowIcon = false;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Bonus Hunt";
             ((System.ComponentModel.ISupportInitialize)(this.Bonuses)).EndInit();
             this.ResumeLayout(false);
@@ -299,6 +325,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Bet;
         private System.Windows.Forms.DataGridViewTextBoxColumn Result;
         private System.Windows.Forms.DataGridViewTextBoxColumn Mutli;
+        private System.Windows.Forms.Label lblProjectedEndAmount;
     }
 }
 
