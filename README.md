@@ -8,6 +8,7 @@ Shows useful statistics for your bonus hunt
 - Average X Required
 - Running Average Win
 - Running Average X
+- Projected End Amount
 
 If you appreciate my work regarding this project, then I am accepting crypto donations. Donations are not mandatory, but are highly appreciated. Please note that donations are non-refundable.
 
